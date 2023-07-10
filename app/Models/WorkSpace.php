@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class WorkSpace extends Model
 {
     use HasFactory;
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner');
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'workspace');
+    }
 }
