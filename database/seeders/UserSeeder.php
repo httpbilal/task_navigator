@@ -1,12 +1,12 @@
 <?php
 
 namespace Database\Seeders;
+use App\Models\User;
 use Faker\Factory as Faker;
-use App\Models\WorkSpace;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class WorkSpaceSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,10 +18,11 @@ class WorkSpaceSeeder extends Seeder
         $faker = Faker::create();
 
         for ($i = 0; $i < 20; $i++) {
-            WorkSpace::create([
-                'name' => $faker->company,
-                'capacity' => $faker->numberBetween(1, 100),
-                'owner' => $faker->numberBetween(1, 20), // Assuming there are 20 users seeded already
+            User::create([
+                'firstname' => $faker->firstName,
+                'lastname' => $faker->lastName,
+                'email' => $faker->unique()->email,
+                'password' => bcrypt('password'), // Replace with your desired password
             ]);
         }
     }
