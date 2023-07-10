@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\WorkSpaceControllers\WorkSpaceController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WorkSpaceController;
 
 // Protected routes
 Route::middleware('auth:api')->group(function () {

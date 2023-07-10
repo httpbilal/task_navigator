@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\TaskControllers\TaskController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TaskController;
 
 // Protected routes
 Route::middleware('auth:api')->group(function () {

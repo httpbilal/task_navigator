@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProjectControllers\ProjectController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProjectController;
 
 // Protected routes
 Route::middleware('auth:api')->group(function () {

@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserControllers\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 
 // Public routes
 Route::post('register', [UserController::class, 'register']);

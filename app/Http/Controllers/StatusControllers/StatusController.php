@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\StatusControllers;
 
-use App\Models\Project;
+use App\Http\Controllers\Controller;
+use App\Models\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ProjectController extends Controller
+class StatusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
-        return response()->json(['projects' => $projects]);
+        $statuses = Status::all();
+        return response()->json(['statuses' => $statuses]);
     }
 
     /**
@@ -39,39 +40,35 @@ class ProjectController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'description' => 'required|string',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-            'workspace_id' => 'required|exists:work_spaces,id'
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $project = Project::create($request->all());
+        $status = Status::create($request->all());
 
-        return response()->json(['project' => $project, 'message' => 'Project created successfully'], 201);
+        return response()->json(['status' => $status, 'message' => 'Status created successfully'], 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Status  $status
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Project $project)
+    public function show(Status $status)
     {
-        return response()->json(['project' => $project]);
+        return response()->json(['status' => $status]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(Status $status)
     {
         //
     }
@@ -80,38 +77,34 @@ class ProjectController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Status  $status
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, Status $status)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'nullable|string',
-            'description' => 'nullable|string',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date',
-            'workspace_id' => 'nullable|exists:work_spaces,id'
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $project->update($request->all());
+        $status->update($request->all());
 
-        return response()->json(['project' => $project, 'message' => 'Project updated successfully']);
+        return response()->json(['status' => $status, 'message' => 'Status updated successfully']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Status  $status
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Project $project)
+    public function destroy(Status $status)
     {
-        $project->delete();
+        $status->delete();
 
-        return response()->json(['message' => 'Project deleted successfully']);
+        return response()->json(['message' => 'Status deleted successfully']);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthControllers\AuthController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 
 // Public routes
 Route::post('login', [AuthController::class, 'login']);
