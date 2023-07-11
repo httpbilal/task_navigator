@@ -8,7 +8,7 @@ Task Navigator is a robust backend project that provides an API for managing tas
 
 <div align="center">
 
-![Task Navigator](images/task-navigator-icon.png)
+![Task Navigator](Images/task-navigator-icon.png)
 
 </div>
 
