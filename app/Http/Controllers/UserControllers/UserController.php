@@ -9,12 +9,6 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    /**
-     * Register a new user.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -25,43 +19,33 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['Error' => $validator->errors()], 400);
+            return response()->json(['error' => $validator->errors()], 400);
         }
 
         try {
             $user = User::create([
-                'firstname' => $request->firstname,
-                'lastname' => $request->lastname,
-                'email' => $request->email,
-                'password' => bcrypt($request->password)
+                'firstname' => $request->input('firstname'),
+                'lastname' => $request->input('lastname'),
+                'email' => $request->input('email'),
+                'password' => bcrypt($request->input('password'))
             ]);
 
             if ($user) {
-                return response()->json(['User' => $user], 201);
+                return response()->json(['user' => $user], 201);
             } else {
-                return response()->json(['Error' => 'Failed to register User'], 401);
+                return response()->json(['error' => 'Failed to register user'], 401);
             }
         } catch (\Exception $e) {
-            return response()->json(['Error' => $e->getMessage()], 500);
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+
     public function index()
     {
         $users = User::all();
         return response()->json(['users' => $users]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function show($id)
     {
         $user = User::find($id);
@@ -71,13 +55,6 @@ class UserController extends Controller
         return response()->json(['user' => $user]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function update(Request $request, $id)
     {
         $user = User::find($id);
@@ -101,12 +78,6 @@ class UserController extends Controller
         return response()->json(['user' => $user, 'message' => 'User updated successfully']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function destroy($id)
     {
         $user = User::find($id);
@@ -118,6 +89,4 @@ class UserController extends Controller
 
         return response()->json(['message' => 'User deleted successfully']);
     }
-
-
 }

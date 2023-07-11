@@ -8,76 +8,46 @@ use Illuminate\Http\Request;
 
 class WorkSpaceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function index()
     {
-        $workSpaces = WorkSpace::all();
-        return response()->json(['workspaces' => $workSpaces]);
+        $workspaces = WorkSpace::all();
+        return response()->json(['workspaces' => $workspaces]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
             'capacity' => 'required|integer',
             'owner' => 'required',
         ]);
 
-        $workSpace = WorkSpace::create($request->all());
+        $workspace = WorkSpace::create($validatedData);
 
-        return response()->json(['workspace' => $workSpace, 'message' => 'Workspace created successfully.'], 201);
+        return response()->json(['workspace' => $workspace, 'message' => 'Workspace created successfully.'], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\WorkSpace  $workSpace
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function show(WorkSpace $workSpace)
+    public function show(WorkSpace $workspace)
     {
-        return response()->json(['data' => $workSpace]);
+        return response()->json(['data' => $workspace]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\WorkSpace  $workSpace
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function update(Request $request, WorkSpace $workSpace)
+    public function update(Request $request, WorkSpace $workspace)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
             'capacity' => 'required|integer',
             'owner' => 'required',
         ]);
 
-        $workSpace->update($request->all());
+        $workspace->update($validatedData);
 
-        return response()->json(['workspace' => $workSpace, 'message' => 'Workspace updated successfully.']);
+        return response()->json(['workspace' => $workspace, 'message' => 'Workspace updated successfully.']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\WorkSpace  $workSpace
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function destroy(WorkSpace $workSpace)
+    public function destroy(WorkSpace $workspace)
     {
-        $workSpace->delete();
+        $workspace->delete();
 
         return response()->json(['message' => 'Workspace deleted successfully.']);
     }

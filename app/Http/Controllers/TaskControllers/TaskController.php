@@ -9,33 +9,12 @@ use Illuminate\Support\Facades\Validator;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function index()
     {
         $tasks = Task::all();
         return response()->json(['tasks' => $tasks]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -59,35 +38,11 @@ class TaskController extends Controller
         return response()->json(['task' => $task, 'message' => 'Task created successfully'], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function show(Task $task)
     {
         return response()->json(['task' => $task]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Task $task)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function update(Request $request, Task $task)
     {
         $validator = Validator::make($request->all(), [
@@ -111,12 +66,6 @@ class TaskController extends Controller
         return response()->json(['task' => $task, 'message' => 'Task updated successfully']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function destroy(Task $task)
     {
         $task->delete();
