@@ -9,6 +9,8 @@ class Project extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'description', 'start_date', 'end_date', 'workspace'];
+
     public function workspace()
     {
         return $this->belongsTo(Workspace::class, 'workspace');

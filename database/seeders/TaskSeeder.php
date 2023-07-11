@@ -21,13 +21,13 @@ class TaskSeeder extends Seeder
             Task::create([
                 'name' => $faker->sentence(1),
                 'description' => $faker->paragraph,
-                'assignee_id' => $faker->numberBetween(1, 20), // Assuming there are 20 users seeded already
+                'assignees' => $faker->numberBetween(1, 20), // Assuming there are 20 users seeded already
                 'due_date' => $faker->date,
                 'status_id' => $faker->numberBetween(1, 20), // Assuming there are 20 statuses seeded already
                 'project_id' => $faker->numberBetween(1, 20), // Assuming there are 20 projects seeded already
                 'priority' => $faker->randomElement(['high', 'medium', 'low']),
-                'estimated_time' => $faker->dateTime,
-                'actual_time' => $faker->dateTime,
+                'estimated_time' => $faker->time,
+                'actual_time' => $faker->time,
             ]);
         }
     }

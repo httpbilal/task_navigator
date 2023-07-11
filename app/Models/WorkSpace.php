@@ -9,6 +9,8 @@ class WorkSpace extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'capacity', 'owner'];
+
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner');
